@@ -1,5 +1,5 @@
 {
-    "name": "sboo/laravel5-mailjet",
+    "name": "fminov/laravel5-mailjet",
     "description": "Mailjet driver for Laravel 5",
     "keywords": ["laravel", "laravel 5", "mailjet", "api", "v3"],
     "license": "MIT",
