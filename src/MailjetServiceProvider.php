@@ -7,20 +7,20 @@ use Illuminate\Support\ServiceProvider;
 
 class MailjetServiceProvider extends ServiceProvider {
 
-	/**
-	 * Indicates if loading of the provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = true;
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
 
-	/**
-	 * Register the service provider.
-	 *
-	 * @return void
-	 */
-	public function register()
-	{
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
         $this->app->singleton('mailjet', function($app)
         {
             $config = $app['config']->get('services.mailjet', array());
@@ -50,16 +50,15 @@ class MailjetServiceProvider extends ServiceProvider {
                 $mailer->alwaysFrom($from['address'], $from['name']);
             }
 
-            // Here we will determine if the mailer should be in "pretend" mode for this
-            // environment, which will simply write out e-mail to the logs instead of
-            // sending it over the web, which is useful for local dev environments.
-            $pretend = $app['config']->get('mail.pretend', false);
+            $to = $app['config']['mail.to'];
 
-            $mailer->pretend($pretend);
+            if (is_array($to) && isset($to['address'])) {
+                $mailer->alwaysTo($to['address'], $to['name']);
+            }
 
             return $mailer;
         });
-	}
+    }
 
     /**
      * Set a few dependencies on the mailer instance.
@@ -72,14 +71,8 @@ class MailjetServiceProvider extends ServiceProvider {
     {
         $mailer->setContainer($app);
 
-        if ($app->bound('log'))
-        {
-            $mailer->setLogger($app['log']->getMonolog());
-        }
-
-        if ($app->bound('queue'))
-        {
-            $mailer->setQueue($app['queue.connection']);
+        if ($app->bound('queue')) {
+            $mailer->setQueue($app['queue']);
         }
     }
 
@@ -95,8 +88,7 @@ class MailjetServiceProvider extends ServiceProvider {
         // Once we have the transporter registered, we will register the actual Swift
         // mailer instance, passing in the transport instances, which allows us to
         // override this transporter instances during app start-up if necessary.
-        $this->app['swift.mailer'] = $this->app->share(function($app)
-        {
+        $this->app['swift.mailer'] = $this->app->share(function ($app) {
             return new Swift_Mailer($app['swift.transport']->driver());
         });
     }
@@ -108,8 +100,7 @@ class MailjetServiceProvider extends ServiceProvider {
      */
     protected function registerSwiftTransport()
     {
-        $this->app['swift.transport'] = $this->app->share(function($app)
-        {
+        $this->app['swift.transport'] = $this->app->share(function ($app) {
             return new TransportManager($app);
         });
     }
@@ -121,7 +112,7 @@ class MailjetServiceProvider extends ServiceProvider {
      */
     public function provides()
     {
-        return ['mailer', 'swift.mailer', 'swift.transport','mailjet'];
+        return ['mailer', 'swift.mailer', 'swift.transport', 'mailjet'];
     }
 
 }
