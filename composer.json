@@ -1,6 +1,6 @@
 {
-    "name": "fminov/laravel5-mailjet",
-    "description": "Mailjet driver for Laravel 5",
+    "name": "sh0umik/laravel5-mailjet-5.3-fix",
+    "description": "Mailjet driver for Laravel 5 with 5.3 Fix",
     "keywords": ["laravel", "laravel 5", "mailjet", "api", "v3"],
     "license": "MIT",
     "authors": [
@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Sboo\\Laravel5Mailjet\\": "src/"
+            "Sboo\\Laravel5MailjetFix\\": "src/"
         }
     },
     "minimum-stability": "stable"
