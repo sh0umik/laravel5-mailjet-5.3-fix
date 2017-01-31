@@ -1,6 +1,6 @@
 <?php
 
-namespace Sboo\Laravel5Mailjet\Transport;
+namespace Sboo\Laravel5MailjetFix\Transport;
 
 use Swift_Mime_Message;
 use GuzzleHttp\Post\PostFile;

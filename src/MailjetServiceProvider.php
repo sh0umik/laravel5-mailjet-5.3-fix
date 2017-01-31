@@ -1,6 +1,6 @@
-<?php namespace Sboo\Laravel5Mailjet;
+<?php namespace Sboo\Laravel5MailjetFix;
 
-use Sboo\Laravel5Mailjet\Api\Mailjet;
+use Sboo\Laravel5MailjetFix\Api\Mailjet;
 use Swift_Mailer;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\ServiceProvider;

@@ -1,6 +1,6 @@
-<?php namespace Sboo\Laravel5Mailjet;
+<?php namespace Sboo\Laravel5MailjetFix;
 
-use Sboo\Laravel5Mailjet\Transport\MailjetTransport;
+use Sboo\Laravel5MailjetFix\Transport\MailjetTransport;
 use Illuminate\Mail\TransportManager as BaseTransportManager;
 
 class TransportManager extends BaseTransportManager {
