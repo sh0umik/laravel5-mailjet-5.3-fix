@@ -22,7 +22,7 @@ composer update
 
 Next you open up app/config/app.php and replace the MailServiceProvider with
 ```php
-'Sboo\Laravel5Mailjetfix\MailjetServiceProvider'
+'Sboo\Laravel5MailjetFix\MailjetServiceProvider'
 ```
 
 **NOTE** It is very important that you replace the default service providers to avoid conflicts. You don't lose any original functionality regarding mail drivers, they are still available.
@@ -47,7 +47,7 @@ I have also integrated direct access to Mailtjet's API, based on their [example 
 
 To install, append the aliases in config/app.php with
 ```php
-'Mailjet'   => 'Sboo\Laravel5Mailjetfix\Facades\Mailjet',
+'Mailjet'   => 'Sboo\Laravel5MailjetFix\Facades\Mailjet',
 ```
     
 To use the API in your code, add 
